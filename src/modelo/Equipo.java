@@ -2,14 +2,15 @@ package modelo;
 
 public class Equipo {
 	private String nombre;
+
 //Constructor
 	public Equipo(String nombre) {
-	this.nombre = nombre;
-}
+		this.nombre = nombre;
+	}
 
 	public Equipo() {
-}
-	
+	}
+
 //Método
 
 	public String getNombre() {
@@ -19,6 +20,4 @@ public class Equipo {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-//probando comentario
-        // otra prueba
 }
