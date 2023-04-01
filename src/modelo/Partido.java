@@ -1,19 +1,25 @@
 package modelo;
 
 public class Partido {
+        private String id;
 	private Equipo equipo1;
 	private Equipo equipo2;
 	private int golesEquipo1;
 	private int golesEquipo2;
 
-//Constructor
-	public Partido(Equipo equipo1, Equipo equipo2, int golesEquipo1, int golesEquipo2) {
+//Constructores
+	public Partido(String id, Equipo equipo1, Equipo equipo2, int golesEquipo1, int golesEquipo2) {
+                this.id = id;
 		this.equipo1 = equipo1;
 		this.equipo2 = equipo2;
 		this.golesEquipo1 = golesEquipo1;
 		this.golesEquipo2 = golesEquipo2;
 	}
 
+        public Partido(String id) {
+                this.id = id;
+        }
+        
 	public Partido() {
 	}
 
@@ -50,11 +56,20 @@ public class Partido {
 		this.golesEquipo2 = golesEquipo2;
 	}
 
-	public static String resultado(Equipo equipo) {
+        public String getId() {
+                return id;
+        }
+
+        public void setId(String id) {
+                this.id = id;
+        }
+        
+
+	public String resultado(Equipo equipo) {
 		String resultado = "";
 
 		if (equipo.equals(equipo1)) {
-			if (goles1 > goles2) {
+			if (golesEquipo1 > golesEquipo2) {
 				resultado = "ganador";
 			} else {
 				resultado = "perdedor";
@@ -62,14 +77,14 @@ public class Partido {
 		}
 
 		if (equipo.equals(equipo2)) {
-			if (goles2 > goles1) {
+			if (golesEquipo2 > golesEquipo1) {
 				resultado = "ganador";
 			} else {
 				resultado = "perdedor";
 			}
 		}
 
-		if (goles1 == goles2) {
+		if (golesEquipo1 == golesEquipo2) {
 			resultado = "empate";
 		}
 

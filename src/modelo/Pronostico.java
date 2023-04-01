@@ -37,9 +37,10 @@ public class Pronostico {
 	public void setResultado(String resultado) {
 		this.resultado = resultado;
 	}
-	public static int puntos () {
-		if (this.resultado == this.partido.resultado(this.equipo)) {
+	public int puntos () {
+		if (resultado.equals(partido.resultado(equipo))) {
 		return 	1; 
+                }
 		else{
 			return 0;
 		}
