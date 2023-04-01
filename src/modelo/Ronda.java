@@ -1,11 +1,13 @@
 package modelo;
 
+import java.util.ArrayList;
+
 public class Ronda {
     
 	private String nro;
-	private Partido[] partidos;
+	private ArrayList<Partido> partidos;
         
-	public Ronda(String nro, Partido[] partidos) {
+	public Ronda(String nro, ArrayList<Partido> partidos) {
 		this.nro = nro;
 		this.partidos = partidos;
 	}
@@ -19,10 +21,10 @@ public class Ronda {
 	public void setNro(String nro) {
 		this.nro = nro;
 	}
-	public Partido[] getPartidos() {
+	public ArrayList<Partido> getPartidos() {
 		return partidos;
 	}
-	public void setPartidos(Partido[] partidos) {
+	public void setPartidos(ArrayList<Partido> partidos) {
 		this.partidos = partidos;
 	}
         
