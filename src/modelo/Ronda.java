@@ -28,7 +28,7 @@ public class Ronda {
 		this.partidos = partidos;
 	}
         
-       public int puntosRonda(Pronostico[] pronosticos) {
+       public int puntosRonda(ArrayList<Pronostico> pronosticos) {
 
             int puntosTotales = 0;
 

@@ -68,7 +68,7 @@ public class Partido {
 	public String resultado(Equipo equipo) {
 		String resultado = "";
 
-		if (equipo.equals(equipo1)) {
+		if (equipo.getNombre().equals(equipo1.getNombre())) {
 			if (golesEquipo1 > golesEquipo2) {
 				resultado = "ganador";
 			} else {
@@ -76,7 +76,7 @@ public class Partido {
 			}
 		}
 
-		if (equipo.equals(equipo2)) {
+		if (equipo.getNombre().equals(equipo2.getNombre())) {
 			if (golesEquipo2 > golesEquipo1) {
 				resultado = "ganador";
 			} else {
