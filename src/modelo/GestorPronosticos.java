@@ -33,9 +33,30 @@ public class GestorPronosticos {
                 }
                 
                 Ronda ronda = new Ronda("ronda 1",arrayPartidos);
-						
-				
+		
 
+// Agregado 
+                ArrayList arrayPronosticos = new ArrayList<Pronostico>();
+            
+		String archivoPronosticos = "C:\\Users\\luz\\proyecto.java\\PronosticosDeportivosG1\\src\\modelo";
+
+                Partido partido = new partido (); 
+                Equipo equipo = new equipo ();
+                String resultado = "";
+				
+		for(String linea : Files.readAllLines(Paths.get(archivoPronosticos))){
+                    
+                    partido.setId(linea.split(",")[0]);
+                    equipo.setNombre(linea.split(",")[1]);
+                    resultado = (linea.split(",")[2]);
+                    
+                    Pronostico pronostico = new Pronostico(partido,equipo,resulado);
+                    arrayPronosticos.add(pronostico);
+                
+          
+                }		
+              ronda.puntosRonda(arrayPronosticos);
+              System.out.println("Puntos totales " + ronda.puntosRonda(arrayPronosticos))
 	}
 
 }
