@@ -1,15 +1,36 @@
 package modelo;
 
 public class Pronostico {
+	private Persona persona;
 	private Partido partido;
 	private Equipo equipo;
 	private String resultado;
 
+	public Pronostico(Persona persona, Partido partido, Equipo equipo, String resultado) {
+		this.persona = persona;
+		this.partido = partido;
+		this.equipo = equipo;
+		this.resultado = resultado;
+	}
+	
 	public Pronostico(Partido partido, Equipo equipo, String resultado) {
 		this.partido = partido;
 		this.equipo = equipo;
 		this.resultado = resultado;
 	}
+	
+
+	public Persona getPersona() {
+		return persona;
+	}
+
+
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}
+
+
 
 	public Pronostico() {
 	}

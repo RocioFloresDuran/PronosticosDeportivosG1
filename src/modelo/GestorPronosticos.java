@@ -61,8 +61,8 @@ public class GestorPronosticos {
     // Métodos de lectura de archivos
 
     public static List<String> leerResultados() {
-        String archivoResultados = "C:\\Users\\rochi\\OneDrive\\Documentos\\NetBeansProjects"
-                                    + "\\TPIntegradorG1\\src\\modelo\\Resultados.csv";
+        String archivoResultados = "C:\\Users\\Seba\\eclipse-workspace\\"
+        		+ "Pronostico_Deportivo_GIT\\src\\modelo\\Resultados.csv";
         List<String> lineas = null;
         try {
             lineas = Files.readAllLines(Paths.get(archivoResultados));
@@ -74,8 +74,7 @@ public class GestorPronosticos {
     }
 
     public static List<String> leerPronosticos() {
-        String archivoPronosticos = "C:\\Users\\rochi\\OneDrive\\Documentos\\NetBeansProjects"
-                                     + "\\TPIntegradorG1\\src\\modelo\\Pronosticos.csv";
+        String archivoPronosticos = "C:\\Users\\Seba\\eclipse-workspace\\Pronostico_Deportivo_GIT\\src\\modelo\\Pronosticos.csv";
         List<String> lineas = null;
         try {
             lineas = Files.readAllLines(Paths.get(archivoPronosticos));
