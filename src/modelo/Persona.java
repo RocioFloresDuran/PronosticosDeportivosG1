@@ -6,7 +6,7 @@ public class Persona {
 	// atributos
 	private String nombre;
 	private int dni;
-        ArrayList<Pronostico> pronosticosPersona; 
+        private ArrayList<Pronostico> pronosticosPersona; 
 
 	// constructores
 
