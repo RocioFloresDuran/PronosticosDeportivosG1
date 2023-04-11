@@ -5,6 +5,7 @@ public class Pronostico {
 	private Partido partido;
 	private Equipo equipo;
 	private String resultado;
+        private String idRonda;
 
 	public Pronostico(Persona persona, Partido partido, Equipo equipo, String resultado) {
 		this.persona = persona;
@@ -18,6 +19,14 @@ public class Pronostico {
 		this.equipo = equipo;
 		this.resultado = resultado;
 	}
+
+    public Pronostico(Persona persona, Partido partido, Equipo equipo, String resultado, String idRonda) {
+        this.persona = persona;
+        this.partido = partido;
+        this.equipo = equipo;
+        this.resultado = resultado;
+        this.idRonda = idRonda;
+    }
 	
 
 	public Persona getPersona() {
@@ -58,6 +67,14 @@ public class Pronostico {
 	public void setResultado(String resultado) {
 		this.resultado = resultado;
 	}
+        public String getIdRonda() {
+        return idRonda;
+    }
+
+    public void setIdRonda(String idRonda) {
+        this.idRonda = idRonda;
+    }
+        
 	public int puntos () {
 		if (resultado.equals(partido.resultado(equipo))) {
 		return 	1; 
@@ -66,4 +83,6 @@ public class Pronostico {
 			return 0;
 		}
 	}
+
+    
 }
