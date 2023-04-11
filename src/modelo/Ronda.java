@@ -11,8 +11,14 @@ public class Ronda {
 		this.nro = nro;
 		this.partidos = partidos;
 	}
-        
+
+        public Ronda(String nro) {
+                this.nro = nro;
+                this.partidos = new ArrayList();
+        }
+         
 	public Ronda() {
+                this.partidos = new ArrayList();
 	}
         
 	public String getNro() {

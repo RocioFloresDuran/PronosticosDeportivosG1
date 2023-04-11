@@ -11,31 +11,29 @@ public class Persona {
 	// constructores
 
 	public Persona(String nombre, int dni) {
-		//super();
-		this.nombre = nombre;
-		this.dni = dni;
+            this.nombre = nombre;
+            this.dni = dni;
 	}
 
-    public Persona(String nombre, int dni, ArrayList<Pronostico> pronosticosPersona) {
-        this.nombre = nombre;
-        this.dni = dni;
-        this.pronosticosPersona = pronosticosPersona;
-    }
+        public Persona(String nombre, int dni, ArrayList<Pronostico> pronosticosPersona) {
+            this.nombre = nombre;
+            this.dni = dni;
+            this.pronosticosPersona = pronosticosPersona;
+        }
         
-	
-	
 	public Persona() {
-		//super();
+            //super();
 	}
 
 	// getters y setters
 
 	public String getNombre() {
-		return nombre;
+            return nombre;
 	}
 
-	
-	
+        public void setNombre(String nombre) {
+            this.nombre = nombre;
+        }
 
 	public int getDni() {
 		return dni;
@@ -56,9 +54,9 @@ public class Persona {
 
     public int puntoPersoRonda(Ronda ronda){
         ArrayList<Pronostico> pronosticosRonda = new ArrayList();
-        for (Pronostico item: pronosticosPersona ){
-            if(ronda.getNro().equals(item.getIdRonda()) ){
-            pronosticosRonda.add(item);
+        for (Pronostico item: pronosticosPersona){
+            if(ronda.getNro().equals(item.getIdRonda())){
+                pronosticosRonda.add(item);
             } 
         }
         return ronda.puntosRonda(pronosticosRonda);
