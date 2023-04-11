@@ -46,6 +46,7 @@ public class GestorPronosticos {
             if(existe == false){ //Si NO existe
                 Ronda rondaNueva = new Ronda(idRonda); //Creo una con el id leído
                 rondaNueva.getPartidos().add(partido); //Le añado el partido creado
+                arrayRondas.add(rondaNueva); //Agrego la nueva ronda al array de rondas
             }
             
         }
