@@ -53,6 +53,7 @@ public class GestorPronosticos {
 
         // Inicialización de variables de pronosticos
         String resultado = "";
+        String nombrePersona = "";
 
         // Recorro el archivo y creo objetos Pronostico en una colección
         for (String linea : leerPronosticos()) {
@@ -60,9 +61,23 @@ public class GestorPronosticos {
             Partido partido = new Partido(linea.split(",")[0]);
             Equipo equipo = new Equipo(linea.split(",")[1]);
             resultado = linea.split(",")[2];
+            nombrePersona = linea.split(",")[3];
 
             Pronostico pronostico = new Pronostico(partido, equipo, resultado);
-
+            boolean existe = false; // Variable auxiliar
+            
+            for (Persona elemento : arrayPersonas){ //Recorro array de personas
+                if(elemento.getNombre().equals(nombrePersona)){ //Si existe alguna con el mismo nombre leído de archivo
+                    elemento.getPronosticosPersona().add(pronostico); //Le añado el pronostico creado
+                    existe = true;
+                }
+            } //Finalizo recorrido del array y ahora sé si la persona ya existe o no
+            
+            if(existe == false){ //Si NO existe
+                Persona personaNueva = new Persona(nombrePersona); //Creo una con el nombre leído
+                personaNueva.getPronosticosPersona().add(pronostico); //Le añado el pronostico creado
+                arrayPersonas.add(personaNueva); //Agrego la nueva persona al array de persona
+            }
         }
 
         // Imprimo resultado de puntos con la colección de pronosticos como argumento

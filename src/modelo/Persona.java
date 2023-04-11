@@ -25,6 +25,11 @@ public class Persona {
             //super();
 	}
 
+        public Persona(String nombre) {
+        this.nombre = nombre;
+        this.pronosticosPersona= new ArrayList();
+        }
+        
 	// getters y setters
 
 	public String getNombre() {
