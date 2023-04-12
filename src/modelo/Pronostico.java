@@ -20,8 +20,8 @@ public class Pronostico {
 		this.resultado = resultado;
 	}
 
-    public Pronostico(Persona persona, Partido partido, Equipo equipo, String resultado, String idRonda) {
-        this.persona = persona;
+    public Pronostico(Partido partido, Equipo equipo, String resultado, String idRonda) {
+        this.persona = new Persona();
         this.partido = partido;
         this.equipo = equipo;
         this.resultado = resultado;

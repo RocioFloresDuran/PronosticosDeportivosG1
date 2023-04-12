@@ -54,6 +54,7 @@ public class GestorPronosticos {
         // Inicialización de variables de pronosticos
         String resultado = "";
         String nombrePersona = "";
+        String rondaNro = "";
 
         // Recorro el archivo y creo objetos Pronostico en una colección
         for (String linea : leerPronosticos()) {
@@ -62,8 +63,9 @@ public class GestorPronosticos {
             Equipo equipo = new Equipo(linea.split(",")[1]);
             resultado = linea.split(",")[2];
             nombrePersona = linea.split(",")[3];
-
-            Pronostico pronostico = new Pronostico(partido, equipo, resultado);
+            rondaNro = linea.split(",")[4];
+            
+            Pronostico pronostico = new Pronostico(partido, equipo, resultado, rondaNro);
             boolean existe = false; // Variable auxiliar
             
             for (Persona elemento : arrayPersonas){ //Recorro array de personas
@@ -80,16 +82,23 @@ public class GestorPronosticos {
             }
         }
 
-        // Imprimo resultado de puntos con la colección de pronosticos como argumento
-//        System.out.println("Puntos totales de la ronda: " + ronda.puntosRonda(arrayPronosticos));
+        System.out.println("Persona   Puntos");
+        
+        for (Persona pers : arrayPersonas) {
+            int total = 0;
+            for (Ronda ron : arrayRondas) {
+                total += pers.puntoPersoRonda(ron);
+            }
+            System.out.println(pers.getNombre() + "      " + total);
+
+        }
 
     }
     
     // Métodos de lectura de archivos
 
     public static List<String> leerResultados() {
-        String archivoResultados = "C:\\Users\\Seba\\eclipse-workspace\\"
-        		+ "Pronostico_Deportivo_GIT\\src\\modelo\\Resultados.csv";
+        String archivoResultados = "C:\\Users\\rochi\\OneDrive\\Documentos\\NetBeansProjects\\TPIntegradorG1\\src\\modelo\\Resultados.csv";
         List<String> lineas = null;
         try {
             lineas = Files.readAllLines(Paths.get(archivoResultados));
@@ -101,7 +110,7 @@ public class GestorPronosticos {
     }
 
     public static List<String> leerPronosticos() {
-        String archivoPronosticos = "C:\\Users\\Seba\\eclipse-workspace\\Pronostico_Deportivo_GIT\\src\\modelo\\Pronosticos.csv";
+        String archivoPronosticos = "C:\\Users\\rochi\\OneDrive\\Documentos\\NetBeansProjects\\TPIntegradorG1\\src\\modelo\\Pronosticos.csv";
         List<String> lineas = null;
         try {
             lineas = Files.readAllLines(Paths.get(archivoPronosticos));

@@ -1,4 +1,7 @@
-idPartido,Equipo 1,Equipo 2,Goles 1,Goles 2
-a,Argentina,Arabia,3,2
-b,Polonia,Mexico,1,1
-c,Francia,Inglaterra,3,0
+idPartido,Equipo 1,Equipo 2,Goles 1,Goles 2,Ronda
+a,Argentina,Arabia,3,2,1
+b,Polonia,Mexico,1,1,1
+c,Francia,Inglaterra,3,0,1
+d,Chile,Paraguay,4,1,2
+e,Peru,Uruguay,2,4,2
+f,Alemania,Portugal,2,0,2

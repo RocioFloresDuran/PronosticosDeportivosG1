@@ -58,7 +58,9 @@ public class Persona {
 
 
     public int puntoPersoRonda(Ronda ronda){
+        
         ArrayList<Pronostico> pronosticosRonda = new ArrayList();
+        
         for (Pronostico item: pronosticosPersona){
             if(ronda.getNro().equals(item.getIdRonda())){
                 pronosticosRonda.add(item);
