@@ -55,18 +55,26 @@ public class Persona {
     public void setPronosticosPersona(ArrayList<Pronostico> pronosticosPersona) {
         this.pronosticosPersona = pronosticosPersona;
     }
-
-
-    public int puntoPersoRonda(Ronda ronda){
+    
+    public int puntoPersoRonda(ArrayList<Ronda> arrayRondas){
         
-        ArrayList<Pronostico> pronosticosRonda = new ArrayList();
+        int puntosTotalesRondas = 0;
         
-        for (Pronostico item: pronosticosPersona){
-            if(ronda.getNro().equals(item.getIdRonda())){
-                pronosticosRonda.add(item);
-            } 
+        for (Ronda elemento : arrayRondas) { //Recorro las rondas recibidas por parámetro
+            
+            //Inicializo un array para apartar los pronósticos que sean de la ronda actual
+            ArrayList<Pronostico> pronosticosRonda = new ArrayList();
+            
+            for (Pronostico item : pronosticosPersona) { //Recorro todos los pronósticos de la persona
+                if (elemento.getNro().equals(item.getIdRonda())) { //Si pertenecen a la ronda
+                    pronosticosRonda.add(item); //Los agrego al array 
+                }
+            }
+            //Llamo al método de la ronda actual con el array resultante, acumulo el resultado
+            puntosTotalesRondas += elemento.puntosRonda(pronosticosRonda);
         }
-        return ronda.puntosRonda(pronosticosRonda);
+        
+        return puntosTotalesRondas;
 }
 
 

@@ -82,17 +82,12 @@ public class GestorPronosticos {
             }
         }
 
+        //Salida
         System.out.println("Persona   Puntos");
-        
         for (Persona pers : arrayPersonas) {
-            int total = 0;
-            for (Ronda ron : arrayRondas) {
-                total += pers.puntoPersoRonda(ron);
-            }
-            System.out.println(pers.getNombre() + "      " + total);
-
+            System.out.println(pers.getNombre() + "      " + pers.puntoPersoRonda(arrayRondas));
         }
-
+        
     }
     
     // Métodos de lectura de archivos
