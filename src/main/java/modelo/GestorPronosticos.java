@@ -1,12 +1,17 @@
 package modelo;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.*;
 
 public class GestorPronosticos {
 
@@ -21,6 +26,7 @@ public class GestorPronosticos {
         int goles1 = 0;
         int goles2 = 0;
         String idRonda = "";
+
 
         // Recorro el archivo y creo objetos Partido
         for (String linea : leerResultados()) {
@@ -57,7 +63,7 @@ public class GestorPronosticos {
         String rondaNro = "";
 
         // Recorro el archivo y creo objetos Pronostico en una colección
-        for (String linea : leerPronosticos()) {
+        /*for (String linea : leerPronosticos()) {
 
             Partido partido = new Partido(linea.split(",")[0]);
             Equipo equipo = new Equipo(linea.split(",")[1]);
@@ -80,20 +86,21 @@ public class GestorPronosticos {
                 personaNueva.getPronosticosPersona().add(pronostico); //Le añado el pronostico creado
                 arrayPersonas.add(personaNueva); //Agrego la nueva persona al array de persona
             }
-        }
+        } */
 
         //Salida
         System.out.println("Persona   Puntos");
         for (Persona pers : arrayPersonas) {
             System.out.println(pers.getNombre() + "      " + pers.puntoPersoRonda(arrayRondas));
         }
-        
+
+        leerPronosticos();
     }
     
     // Métodos de lectura de archivos
 
     public static List<String> leerResultados() {
-        String archivoResultados = "C:\\Users\\rochi\\OneDrive\\Documentos\\NetBeansProjects\\TPIntegradorG1\\src\\modelo\\Resultados.csv";
+        String archivoResultados = "C:\\Users\\lu_el\\IdeaProjects\\Proyectointegrador\\PronosticosDeportivosG1\\src\\main\\java\\modelo\\Resultados.csv";
         List<String> lineas = null;
         try {
             lineas = Files.readAllLines(Paths.get(archivoResultados));
@@ -104,8 +111,8 @@ public class GestorPronosticos {
         return lineas;
     }
 
-    public static List<String> leerPronosticos() {
-        String archivoPronosticos = "C:\\Users\\rochi\\OneDrive\\Documentos\\NetBeansProjects\\TPIntegradorG1\\src\\modelo\\Pronosticos.csv";
+    public static void leerPronosticos() {
+        /*String archivoPronosticos = "C:\\Users\\lu_el\\IdeaProjects\\Proyectointegrador\\PronosticosDeportivosG1\\src\\main\\java\\modelo\\Pronosticos.csv";
         List<String> lineas = null;
         try {
             lineas = Files.readAllLines(Paths.get(archivoPronosticos));
@@ -113,7 +120,44 @@ public class GestorPronosticos {
         } catch (IOException ex) {
             Logger.getLogger(GestorPronosticos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return lineas;
+        return lineas;*/
+        Properties properties= new Properties();
+        try {
+            properties.load(new FileInputStream(new File("C:\\Users\\lu_el\\IdeaProjects\\Proyectointegrador\\PronosticosDeportivosG1\\src\\main\\java\\modelo\\config.ini")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println(properties.getProperty("driver"));
+            System.out.println(properties.getProperty ("url"));
+            System.out.println(properties.getProperty ("user"));
+            System.out.println(properties.getProperty("password"));
+
+        //LECTURA BASE DATOS
+        String driver = properties.getProperty("driver");
+        String url =properties.getProperty("url");
+        String user = properties.getProperty("user");
+        String password = properties.getProperty("password");
+        String database = properties.getProperty("database");
+
+        try {
+            Class.forName(driver);
+            Connection con = DriverManager.getConnection(url+database,user, password);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from personas");
+            while(rs.next())
+                System.out.println(rs.getInt(1)+" "+rs.getString(2));
+
+            int iddd = 246810;
+            ResultSet rs2 = stmt.executeQuery("select * from pronosticos where personas_dni =" + iddd);
+            while(rs2.next())
+                System.out.println(rs2.getString(3)+" "+rs2.getString(4) +" "+ rs2.getInt(5)+" "+rs2.getString(6));
+
+            con.close();
+
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
