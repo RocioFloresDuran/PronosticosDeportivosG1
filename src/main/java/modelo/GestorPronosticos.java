@@ -100,7 +100,7 @@ public class GestorPronosticos {
     // Métodos de lectura de archivos
 
     public static List<String> leerResultados() {
-        String archivoResultados = "C:\\Users\\lu_el\\IdeaProjects\\Proyectointegrador\\PronosticosDeportivosG1\\src\\main\\java\\modelo\\Resultados.csv";
+        String archivoResultados = "C:\\Users\\Vanesa\\eclipse-workspace\\PronosticosDeportivosG1\\src\\main\\java\\modelo\\Resultados.csv";
         List<String> lineas = null;
         try {
             lineas = Files.readAllLines(Paths.get(archivoResultados));
@@ -121,9 +121,11 @@ public class GestorPronosticos {
             Logger.getLogger(GestorPronosticos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lineas;*/
+
+        ArrayList<Persona> arrayPersona2 = new ArrayList<>();
         Properties properties= new Properties();
         try {
-            properties.load(new FileInputStream(new File("C:\\Users\\lu_el\\IdeaProjects\\Proyectointegrador\\PronosticosDeportivosG1\\src\\main\\java\\modelo\\config.ini")));
+            properties.load(new FileInputStream(new File("C:\\Users\\Vanesa\\eclipse-workspace\\PronosticosDeportivosG1\\src\\main\\java\\modelo\\config.ini")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -145,8 +147,12 @@ public class GestorPronosticos {
             Connection con = DriverManager.getConnection(url+database,user, password);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select * from personas");
+
+
             while(rs.next())
                 System.out.println(rs.getInt(1)+" "+rs.getString(2));
+            Persona persona= new Persona(rs.getString(2), rs.getInt(1));
+           arrayPersona2.add(persona);
 
             int iddd = 246810;
             ResultSet rs2 = stmt.executeQuery("select * from pronosticos where personas_dni =" + iddd);
