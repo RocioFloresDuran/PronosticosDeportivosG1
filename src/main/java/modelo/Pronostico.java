@@ -75,7 +75,7 @@ public class Pronostico {
         this.idRonda = idRonda;
     }
         
-	public int puntos () {
+	public int aciertos() {
 		if (resultado.equals(partido.resultado(equipo))) {
 		return 	1; 
                 }

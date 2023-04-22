@@ -13,6 +13,7 @@ public class Persona {
 	public Persona(String nombre, int dni) {
             this.nombre = nombre;
             this.dni = dni;
+            this.pronosticosPersona= new ArrayList();
 	}
 
         public Persona(String nombre, int dni, ArrayList<Pronostico> pronosticosPersona) {
@@ -56,9 +57,9 @@ public class Persona {
         this.pronosticosPersona = pronosticosPersona;
     }
     
-    public int puntoPersoRonda(ArrayList<Ronda> arrayRondas){
+    public int aciertoPersoRonda(ArrayList<Ronda> arrayRondas){
         
-        int puntosTotalesRondas = 0;
+        int aciertosTotalesRondas = 0;
         
         for (Ronda elemento : arrayRondas) { //Recorro las rondas recibidas por parámetro
             
@@ -71,10 +72,10 @@ public class Persona {
                 }
             }
             //Llamo al método de la ronda actual con el array resultante, acumulo el resultado
-            puntosTotalesRondas += elemento.puntosRonda(pronosticosRonda);
+            aciertosTotalesRondas += elemento.aciertosRonda(pronosticosRonda);
         }
         
-        return puntosTotalesRondas;
+        return aciertosTotalesRondas;
 }
 
 

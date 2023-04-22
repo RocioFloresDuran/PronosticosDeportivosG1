@@ -34,9 +34,9 @@ public class Ronda {
 		this.partidos = partidos;
 	}
         
-       public int puntosRonda(ArrayList<Pronostico> pronosticos) {
+       public int aciertosRonda(ArrayList<Pronostico> pronosticos) {
 
-            int puntosTotales = 0;
+            int aciertosTotales = 0;
 
             for (Pronostico pronostico : pronosticos) { //recorro el array de pronósticos que vino por parámetro
                 for (Partido partido : partidos) { //recorro el array de partidos que tengo en el objeto ronda
@@ -44,13 +44,13 @@ public class Ronda {
                     if (pronostico.getPartido().getId().equals(partido.getId())) { //si el id del partido en el pronóstico 
                                                                                    //es igual al id del partido en la ronda            
                         pronostico.setPartido(partido); //guardo ese partido en el pronóstico
-                        puntosTotales += pronostico.puntos(); //llamo al método puntos y lo guardo en la variable
+                        aciertosTotales += pronostico.aciertos(); //llamo al método puntos y lo guardo en la variable
                     }
                     
                 }
             }
 
-            return puntosTotales;
+            return aciertosTotales;
         }
 
 }
