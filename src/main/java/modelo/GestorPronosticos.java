@@ -16,7 +16,7 @@ import java.sql.*;
 public class GestorPronosticos {
 
     static int puntos = 0;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CantidadDeCamposException {
 
         //Inicialización de arrays
         ArrayList<Persona> arrayPersonas = cargarPersonasPronosticos();
@@ -31,6 +31,8 @@ public class GestorPronosticos {
 
         // Recorro el archivo y creo objetos Partido
         for (String linea : leerResultados()) {
+
+            validar(linea);
 
             idPartido = linea.split(",")[0];
             Equipo equipo1 = new Equipo(linea.split(",")[1]);
@@ -84,7 +86,7 @@ public class GestorPronosticos {
 
         ArrayList<Persona> arrayPersona = new ArrayList<>();
 
-        //LECTURA ARCHIVO DE DATOS DE CONEXIÓN
+        //Lectura de archivo de Datos de Conexión
         Properties properties= new Properties();
         try {
             properties.load(new FileInputStream(new File("C:\\Users\\rochi\\OneDrive\\Documentos\\NetBeansProjects\\TPIntegradorG1\\src\\main\\java\\modelo\\config.ini")));
@@ -98,25 +100,27 @@ public class GestorPronosticos {
         String database = properties.getProperty("database");
         puntos = Integer.parseInt(properties.getProperty("puntosPartido"));
 
-        //LECTURA BASE DATOS
+        //Lectura Base de Datos
         try {
             Class.forName(driver);
             Connection con = DriverManager.getConnection(url+database,user, password);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select * from personas");
 
+            //Cargo array de personas
             while(rs.next()) {
                 Persona persona = new Persona(rs.getString(2), rs.getInt(1));
-                arrayPersona.add(persona); //Cargo array de personas
+                arrayPersona.add(persona);
             }
 
+            //Cargo pronósticos a cada persona
             for (Persona persona : arrayPersona){
                 ResultSet rs2 = stmt.executeQuery("select * from pronosticos where personas_dni ="+persona.getDni());
                 while (rs2.next()){
                     Partido partido = new Partido(rs2.getString(2));
                     Equipo equipo = new Equipo(rs2.getString(3));
                     Pronostico pronostico = new Pronostico(partido,equipo,rs2.getString(4),rs2.getString(5));
-                    persona.getPronosticosPersona().add(pronostico); //Cargo pronósticos a cada persona
+                    persona.getPronosticosPersona().add(pronostico);
                 }
             }
 
@@ -127,6 +131,28 @@ public class GestorPronosticos {
         }
 
         return arrayPersona;
+    }
+
+    public static void validar(String linea) throws CantidadDeCamposException{
+
+        String[] contenidoLinea = linea.split(",");
+
+        //Validar la cantidad de celdas de la linea
+        if(contenidoLinea.length !=6) {
+            System.out.println("Error - cantidad de columnas incorrecto");
+            throw new CantidadDeCamposException();
+        }
+
+        //validar que los goles sean enteros
+        //Para ello primero los convertimos
+        try {
+            Integer.parseInt(contenidoLinea[3]); //goles equipo 1
+            Integer.parseInt(contenidoLinea[4]); //goles equipo 2
+        } catch (Exception e) {
+            System.out.println("Error - formato de goles incorrecto");
+
+        }
+
     }
 
 }
